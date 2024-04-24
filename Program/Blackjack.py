@@ -1,9 +1,6 @@
 import random
 import os
-my_cards=[]
-dealer=[]
 card_list=[11,1,2,3,4,5,6,7,8,9,10,10,10,10]
-whl1=True
 def dealing_cards(my_cards1,dealer1):
     """Dealing cards"""
     my_cards1 = my_cards.extend(random.sample(card_list,2))
@@ -22,7 +19,7 @@ def clr():
     print(f"Dealer cards are:\n{dealer}")
     print(f"Your cards are:\n{my_cards}")
 def calc():
-    """Dealing dealer cards when dealer<my_cards"""
+    """Dealing dealer cards when dealer < my_cards"""
     whl2=True
     while whl2:
         dealer.append(random.choice(card_list))
@@ -52,36 +49,48 @@ def blackjack():
         clr()
         print("You lose")
     elif dealer_sum < my_cards_sum:
-        calc()        
-#Starring definattion
-my_cards_sum = 0
-dealer_sum = 0
-dealing_cards(my_cards,dealer)
-first_dealer_card=dealer[1]
-print(f"Dealer cards are:\n[X,{first_dealer_card}]")
-print(f"Your cards are:\n{my_cards}")
-my_cards_sum,dealer_sum=add(my_cards),add(dealer)
-if my_cards_sum==21 and 11 in my_cards and 10 in my_cards:
-    blackjack()
-    whl1=False
+        calc()     
 
-#Main game
-while whl1:
-    more_cards=input("Do you want to Hit or Stand?").lower()
-    if more_cards == "hit":
-        my_cards.append(random.choice(card_list))
-        os.system('cls')
-        print(f"Dealer cards are:\n[X,{first_dealer_card}]")
-        print(f"Your cards are:\n{my_cards}")
-        my_cards_sum,dealer_sum=add(my_cards),add(dealer)
-        if my_cards_sum < 21:
-            whl1=True
-        elif my_cards_sum==21:
-            blackjack()
-            whl1=False
-        elif my_cards_sum > 21:
-            print("It's a bust")
-            whl1=False
-    elif more_cards == "stand":
+whl3=True
+while whl3:   
+#Starring definattion
+    whl1=True
+    my_cards=[]
+    dealer=[]
+    my_cards_sum = 0
+    dealer_sum = 0
+    dealing_cards(my_cards,dealer)
+    first_dealer_card=dealer[1]
+    print(f"Dealer cards are:\n[X,{first_dealer_card}]")
+    print(f"Your cards are:\n{my_cards}")
+    my_cards_sum,dealer_sum=add(my_cards),add(dealer)
+    if my_cards_sum==21 and 11 in my_cards and 10 in my_cards:
         blackjack()
         whl1=False
+
+    #Main game
+    while whl1:
+        more_cards=input("Do you want to Hit or Stand?").lower()
+        if more_cards == "hit":
+            my_cards.append(random.choice(card_list))
+            os.system('cls')
+            my_cards_sum,dealer_sum=add(my_cards),add(dealer)
+            print(f"Dealer cards are:\n[X,{first_dealer_card}]")
+            print(f"Your cards are:\n{my_cards}")
+            if my_cards_sum < 21:
+                whl1=True
+            elif my_cards_sum==21:
+                blackjack()
+                whl1=False
+            elif my_cards_sum > 21:
+                print("It's a bust")
+                whl1=False
+        elif more_cards == "stand":
+            blackjack()
+            whl1=False
+    Continue=input("Do you want to play again?(Yes/No)").lower()
+    if Continue == "yes":
+        whl3==True
+        os.system('cls')
+    elif Continue=="no":
+        whl3=False
